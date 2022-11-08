@@ -1,3 +1,5 @@
-stdout = "not ok"
+stdout = """not ok
+hello world!
+Goodbye Marty!"""
 args = "argument_1 argument_2 argument_3"
 description="Should display 'not ok'"
