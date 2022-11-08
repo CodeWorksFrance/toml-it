@@ -1,4 +1,5 @@
 import { getTestsStructures, run } from "./toml/run";
+import * as glob from 'glob';
 import * as fs from "fs";
 
 describe("Framework specifications", () => {
@@ -41,9 +42,17 @@ describe("Framework specifications", () => {
   describe('Run', () => {
     it('should display correct result', () => {
       const spy = jest.spyOn(console, 'log');
+      jest.spyOn(glob, 'sync').mockReturnValueOnce(['test.spec.toml']);
+      jest
+        .spyOn(fs, "readFileSync")
+        .mockReturnValueOnce(`
+          stdout="First test"
+          description="This is my first test"
+        `);
+
       run();
-      expect(spy).toHaveBeenNthCalledWith(1, " ✅ tests/first.spec.toml ▶ This is my first test");
-      expect(spy).toHaveBeenNthCalledWith(2, " ✅ tests/second.spec.toml ▶ This is my second test");
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenNthCalledWith(1, " ✅ test.spec.toml ▶ This is my first test");
     });
   });
 });
