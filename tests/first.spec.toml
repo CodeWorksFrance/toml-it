@@ -1,3 +1,3 @@
-stdout = "First test"
+stdout = "not ok"
 args = "argument_1 argument_2 argument_3"
-description="This is my first test"
+description="Should display 'not ok'"

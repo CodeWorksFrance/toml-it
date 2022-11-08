@@ -18,8 +18,9 @@
     "prebuild": "jest --coverage",
     "build": "tsc",
     "start": "node ./lib/",
-    "test": "jest",
-    "coverage": "jest --coverage",
+    "test": "jest --silent ./src/framework.spec.ts",
+    "test:runner": "jest ./src/toml/runner.spec.ts",
+    "coverage": "jest --coverage --silent",
     "lint": "tslint -c tslint.json src/**/*.ts",
     "prepublish": "npm run build"
   },

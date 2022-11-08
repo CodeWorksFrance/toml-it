@@ -1,7 +1,6 @@
 import * as glob from "glob";
 import * as fs from "fs";
 import { TestRunner } from "./toml";
-import { Status } from "./models/result.model";
 
 describe("Framework specifications", () => {
   describe("TOML parsing", () => {
@@ -50,11 +49,11 @@ describe("Framework specifications", () => {
       const spy = jest.spyOn(console, "log");
       jest.spyOn(glob, "sync").mockReturnValueOnce(["test.spec.toml"]);
       jest.spyOn(fs, "readFileSync").mockReturnValueOnce(`
-          stdout="Successfull test"
+          stdout="not ok"
           args="argument_1 argument_2 argument_3"
           description="This is a successfull test"
         `);
-      new TestRunner().run();
+      new TestRunner();
       expect(spy).toHaveBeenCalledWith(
         " ✅ test.spec.toml ▶ This is a successfull test"
       );
@@ -68,9 +67,7 @@ describe("Framework specifications", () => {
           args="argument_1 argument_2 argument_3"
           description="This is a failing test"
         `);
-      const runner = new TestRunner();
-      runner.checkTestStatus = jest.fn().mockReturnValue(Status.FAILURE);
-      runner.run();
+      new TestRunner();
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(
         " ❌ test.spec.toml ▶ This is a failing test"
