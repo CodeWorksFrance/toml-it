@@ -1,5 +1,6 @@
+const MAX_PROPERTIES_LENGTH = 2;
+
 export class Structure {
-  private MAX_PROPERTIES_LENGTH = 2;
   stdout: string;
   description: string;
 
@@ -11,7 +12,7 @@ export class Structure {
   }
 
   checkPropertiesLength(o: object): boolean {
-    if(Object.keys(o).length > this.MAX_PROPERTIES_LENGTH) {
+    if(Object.keys(o).length > MAX_PROPERTIES_LENGTH) {
      throw new Error('There are some missing properties in the TOML file.');
     }
     return true;
