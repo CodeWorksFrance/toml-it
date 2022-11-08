@@ -1,4 +1,3 @@
+import { parseString } from "./toml/parsing";
 
-export function sayHelloWorld(world: string) {
-  return `Hello ${world}`;
-}
+console.log(parseString());
