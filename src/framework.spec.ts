@@ -8,16 +8,17 @@ describe("Framework specifications", () => {
     it("should parse test file", () => {
       jest.spyOn(fs, "readFileSync").mockReturnValueOnce(`
         stdout="test"
+        args="argument_1 argument_2 argument_3"
         description="this is a correct toml test description"`);
       new TestRunner().getTestsStructures();
     });
 
     it("should throw an exception when properties length is not correct", () => {
-      jest.spyOn(fs, "readFileSync").mockReturnValueOnce(
-        `stdout="test"
-           description="this is my first test"
-           unknowProperty=""`
-      );
+      jest.spyOn(fs, "readFileSync").mockReturnValueOnce(`
+        stdout="test"
+        args="argument_1 argument_2 argument_3"
+        description="this is my first test"
+        unknowProperty=""`);
       try {
         new TestRunner().getTestsStructures();
       } catch (e: any) {
@@ -50,6 +51,7 @@ describe("Framework specifications", () => {
       jest.spyOn(glob, "sync").mockReturnValueOnce(["test.spec.toml"]);
       jest.spyOn(fs, "readFileSync").mockReturnValueOnce(`
           stdout="Successfull test"
+          args="argument_1 argument_2 argument_3"
           description="This is a successfull test"
         `);
       new TestRunner().run();
@@ -63,6 +65,7 @@ describe("Framework specifications", () => {
       jest.spyOn(glob, "sync").mockReturnValueOnce(["test.spec.toml"]);
       jest.spyOn(fs, "readFileSync").mockReturnValueOnce(`
           stdout="Failing test"
+          args="argument_1 argument_2 argument_3"
           description="This is a failing test"
         `);
       const runner = new TestRunner();

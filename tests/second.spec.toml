@@ -1,2 +1,3 @@
 stdout = "Second test"
+args = "argument_1 argument_2 argument_3"
 description="This is my second test"
