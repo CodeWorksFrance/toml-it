@@ -1,3 +1,3 @@
-import { parseString } from "./toml/parsing";
+import { run } from "./toml/";
 
-console.log(parseString());
+run();

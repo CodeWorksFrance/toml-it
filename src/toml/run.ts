@@ -15,14 +15,22 @@ function readTomlFile(filename: string): string {
   return file;
 }
 
-export function parseString(): Array<Structure> {
+export function getTestsStructures(): Array<Structure> {
   const specFilesNames = getSpecFilesNames();
   const structures: Array<Structure> = [];
 
   specFilesNames.forEach((filename) => {
     const data = toml.parse(readTomlFile(filename));
-    structures.push(new Structure(data));
+    structures.push(new Structure(data, filename));
   });
 
   return structures;
+}
+
+export function run() {
+  const testsStructures = getTestsStructures();
+  
+  testsStructures.forEach(test => {
+    console.log(` ✅ ${test.filename} ▶ ${test.description}`);
+  })
 }
