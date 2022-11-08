@@ -1,3 +1,3 @@
-import { run } from "./run";
+import { TestRunner } from "./runner";
 
-export { run };
+export { TestRunner };

@@ -1,3 +1,3 @@
-import { run } from "./toml/";
+import { TestRunner } from "./toml/";
 
-run();
+new TestRunner().run();
