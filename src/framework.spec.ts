@@ -48,9 +48,7 @@ describe("Framework specifications", () => {
     it("should display correct result with success status", () => {
       const spy = jest.spyOn(console, "log");
       jest.spyOn(glob, "sync").mockReturnValueOnce(["test.spec.toml"]);
-      jest.spyOn(fs, "readFileSync").mockReturnValueOnce(`stdout = """not ok
-hello world!
-Goodbye Marty!"""
+      jest.spyOn(fs, "readFileSync").mockReturnValueOnce(`stdout = "not ok\nhello world!\nGoodbye Marty!"
       args = "argument_1 argument_2 argument_3"
       description="Should display 'not ok'"
         `);
