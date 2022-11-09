@@ -4,6 +4,7 @@ import * as toml from "toml";
 import { execSync } from "child_process";
 import { Structure } from "../models/structure.model";
 import { Result, ResultMetadatas, Status } from "../models/result.model";
+import { BgGreen, BgRed, FgBlack, Reset } from "../utils/colors";
 
 export class TestRunner {
   private getSpecFilesNames(): Array<string> {
@@ -39,14 +40,23 @@ export class TestRunner {
 
     testsStructures.forEach((test) => {
       const begin = new Date();
-      const output = execSync(`npm start -- ${test.args}`).toString().split("\n").filter((o) => !o.startsWith(">") && o !== "");
+
+      const output = execSync(`npm start -- ${test.args}`)
+        .toString()
+        .split("\n")
+        .filter((o) => !o.startsWith(">") && o !== "")
+        .join("\n");
+
       let result: Result;
-      if (output.join('\n') === test.stdout) {
+
+      if (output === test.stdout) {
         const metadatas = new ResultMetadatas("");
         result = new Result(Status.SUCCESS, metadatas, test);
       } else {
         const metadatas = new ResultMetadatas("");
         result = new Result(Status.FAILURE, metadatas, test);
+        console.log(`${FgBlack} ${BgGreen} EXPECTED ${Reset} ${result.structure.stdout}`);
+        console.log(`${FgBlack} ${BgRed} RECEIVED ${Reset} ${output}`);
       }
       const end = new Date();
       console.log(

@@ -68,7 +68,7 @@ describe("Framework specifications", () => {
           description="This is a failing test"
         `);
       new TestRunner();
-      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledTimes(3);
       expect(spy).toHaveBeenCalledWith(
         " ❌ test.spec.toml ▶ This is a failing test (0ms)"
       );
