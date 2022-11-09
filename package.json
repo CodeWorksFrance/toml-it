@@ -15,7 +15,6 @@
   ],
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "prebuild": "jest --coverage",
     "build": "tsc",
     "start": "node ./lib/",
     "test": "jest --silent ./src/framework.spec.ts",

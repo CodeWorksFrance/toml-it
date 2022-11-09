@@ -1,3 +1,4 @@
+[![Node.js CI](https://github.com/CodeWorksFrance/toml-it/actions/workflows/nodejs-ci.yml/badge.svg)](https://github.com/CodeWorksFrance/toml-it/actions/workflows/nodejs-ci.yml)
 
 # toml-it
 
