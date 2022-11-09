@@ -47,31 +47,27 @@ describe("Framework specifications", () => {
     });
 
     it("should display correct result with success status", () => {
-      const spy = jest.spyOn(console, "log");
       jest.spyOn(glob, "sync").mockReturnValueOnce(["test.spec.toml"]);
-      jest.spyOn(fs, "readFileSync").mockReturnValueOnce(`stdout = "not ok\nhello world!\nGoodbye Marty!"
+      jest.spyOn(fs, "readFileSync")
+        .mockReturnValueOnce(`stdout = "not ok\nhello world!\nGoodbye Marty!"
       args = "argument_1 argument_2 argument_3"
       description="Should display 'not ok'"
         `);
-      new TestRunner();
-      expect(spy).toHaveBeenCalledWith(
-        " ✅ test.spec.toml ▶ Should display 'not ok' (0ms)"
-      );
+      expect(new TestRunner().run()).toBeTruthy();
     });
 
     it("should display correct result with error status", () => {
-      const spy = jest.spyOn(console, "log");
       jest.spyOn(glob, "sync").mockReturnValueOnce(["test.spec.toml"]);
       jest.spyOn(fs, "readFileSync").mockReturnValueOnce(`
           stdout="Failing test"
           args="argument_1 argument_2 argument_3"
           description="This is a failing test"
         `);
-      new TestRunner();
-      expect(spy).toHaveBeenCalledTimes(3);
-      expect(spy).toHaveBeenCalledWith(
-        " ❌ test.spec.toml ▶ This is a failing test (0ms)"
-      );
+      try {
+        new TestRunner().run();
+      } catch (e: any) {
+        expect(e.message).toEqual("toml-it silently failed.");
+      }
     });
   });
 });

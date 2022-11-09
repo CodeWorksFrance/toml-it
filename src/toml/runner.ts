@@ -2,6 +2,7 @@ import * as fs from "fs";
 import * as glob from "glob";
 import * as toml from "toml";
 import { execSync } from "child_process";
+import { log } from "console";
 import { Structure } from "../models/structure.model";
 import { Result, ResultMetadatas, Status } from "../models/result.model";
 import { BgGreen, BgRed, FgBlack, Reset } from "../utils/colors";
@@ -35,18 +36,29 @@ export class TestRunner {
     return structures;
   }
 
-  constructor() {
+  private execSync(test: Structure) {
+    return execSync(`npm start -- ${test.args}`)
+      .toString()
+      .split("\n")
+      .filter((o) => !o.startsWith(">") && o !== "")
+      .join("\n");
+  }
+
+  private diff(stdout: string, output: string) {
+    log(`   ${FgBlack} ${BgGreen} EXPECTED ${Reset} ${stdout}`);
+    log(`   ${FgBlack} ${BgRed} RECEIVED ${Reset} ${output}\n`);
+  }
+
+  private timer(begin: Date, end: Date): string {
+    return `(${end.getTime() - begin.getTime()}ms)`;
+  }
+
+  run(): boolean {
     const testsStructures = this.getTestsStructures();
 
     testsStructures.forEach((test) => {
       const begin = new Date();
-
-      const output = execSync(`npm start -- ${test.args}`)
-        .toString()
-        .split("\n")
-        .filter((o) => !o.startsWith(">") && o !== "")
-        .join("\n");
-
+      const output = this.execSync(test);
       let result: Result;
 
       if (output === test.stdout) {
@@ -55,15 +67,22 @@ export class TestRunner {
       } else {
         const metadatas = new ResultMetadatas("");
         result = new Result(Status.FAILURE, metadatas, test);
-        console.log(`${FgBlack} ${BgGreen} EXPECTED ${Reset} ${result.structure.stdout}`);
-        console.log(`${FgBlack} ${BgRed} RECEIVED ${Reset} ${output}`);
       }
       const end = new Date();
-      console.log(
+
+      log(
         ` ${this.checkMetadatas(result.status)} ${test.filename} ▶ ${
           result.structure.description
-        } (${end.getTime() - begin.getTime()}ms)`
+        } ${this.timer(begin, end)} ${
+          result.status === Status.SUCCESS ? "\n" : ""
+        }`
       );
+
+      if (result.status === Status.FAILURE) {
+        this.diff(result.structure.stdout, output);
+        throw new Error("toml-it silently failed.");
+      }
     });
+    return true;
   }
 }
