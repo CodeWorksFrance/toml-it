@@ -1,3 +1,3 @@
-import { TestRunner } from "./runner";
+import { TestRunner } from './runner';
 
 export { TestRunner };

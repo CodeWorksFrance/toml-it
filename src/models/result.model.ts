@@ -1,9 +1,9 @@
-import { Structure } from "./structure.model";
+import { Structure } from './structure.model';
 
 export enum Status {
   SUCCESS,
   FAILURE,
-};
+}
 
 export class ResultMetadatas {
   icon: string;
@@ -18,7 +18,11 @@ export class Result {
   metadatas: ResultMetadatas;
   structure: Structure;
 
-  constructor(status: Status, metadatas: ResultMetadatas, structure: Structure) {
+  constructor(
+    status: Status,
+    metadatas: ResultMetadatas,
+    structure: Structure
+  ) {
     this.status = status;
     this.metadatas = metadatas;
     this.structure = structure;

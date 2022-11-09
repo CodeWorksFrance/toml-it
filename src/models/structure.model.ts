@@ -12,14 +12,14 @@ export class Structure {
       (o as any).description === undefined ||
       (o as any).args === undefined
     ) {
-      throw new Error("Properties are probably mispelled.");
+      throw new Error('Properties are probably mispelled.');
     }
     return true;
   }
 
   private checkPropertiesLength(o: object): boolean {
     if (Object.keys(o).length > MAX_PROPERTIES_LENGTH) {
-      throw new Error("There are some missing properties in the TOML file.");
+      throw new Error('There are some missing properties in the TOML file.');
     }
     return true;
   }
