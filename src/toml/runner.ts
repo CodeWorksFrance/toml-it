@@ -38,6 +38,7 @@ export class TestRunner {
     const testsStructures = this.getTestsStructures();
 
     testsStructures.forEach((test) => {
+      const begin = new Date();
       const output = execSync(`npm start -- ${test.args}`).toString().split("\n").filter((o) => !o.startsWith(">") && o !== "");
       let result: Result;
       if (output.join('\n') === test.stdout) {
@@ -47,10 +48,11 @@ export class TestRunner {
         const metadatas = new ResultMetadatas("");
         result = new Result(Status.FAILURE, metadatas, test);
       }
+      const end = new Date();
       console.log(
         ` ${this.checkMetadatas(result.status)} ${test.filename} ▶ ${
           result.structure.description
-        }`
+        } (${end.getTime() - begin.getTime()}ms)`
       );
     });
   }

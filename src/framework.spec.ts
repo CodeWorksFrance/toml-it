@@ -43,6 +43,7 @@ describe("Framework specifications", () => {
   describe("Run", () => {
     beforeEach(() => {
       jest.clearAllMocks();
+      jest.useFakeTimers();
     });
 
     it("should display correct result with success status", () => {
@@ -54,7 +55,7 @@ describe("Framework specifications", () => {
         `);
       new TestRunner();
       expect(spy).toHaveBeenCalledWith(
-        " ✅ test.spec.toml ▶ Should display 'not ok'"
+        " ✅ test.spec.toml ▶ Should display 'not ok' (0ms)"
       );
     });
 
@@ -69,7 +70,7 @@ describe("Framework specifications", () => {
       new TestRunner();
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(
-        " ❌ test.spec.toml ▶ This is a failing test"
+        " ❌ test.spec.toml ▶ This is a failing test (0ms)"
       );
     });
   });
