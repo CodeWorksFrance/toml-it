@@ -1,6 +1,6 @@
 {
   "name": "toml-it",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./lib/index.js",
   "license": "MIT",
   "dependencies": {
@@ -17,9 +17,9 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./lib/",
-    "test": "jest --silent ./src/framework.spec.ts",
-    "test:runner": "tsc; jest ./src/toml/runner.spec.ts",
-    "coverage": "jest --coverage --silent",
+    "test": "tsc; npm run test:dev; jest ./src/toml/runner.spec.ts; tsc;",
+    "test:dev": "echo \"console.log((process.argv.length === 3)?'ok':'not ok')\" > ./lib/index.js",
+    "coverage": "tsc; npm run test:dev; jest ./src/toml/runner.spec.ts --coverage; tsc;",
     "lint": "eslint src",
     "prettier": "prettier --write ./src/**/*.ts",
     "prepublish": "npm run build"

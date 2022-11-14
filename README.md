@@ -20,13 +20,22 @@ args=""
 If you are using `jest` as test runner, you can simply create a file `toml-it.spec.ts` and enter the following code:
 
 ```ts
-import { TestRunner } from './';
+import { TestRunner } from "toml-it";
 
-describe('Runner', () => {
-  it('should run tests', () => {
+describe('integration tests with toml', () => {
+  it('toml it', () => {
     new TestRunner().run();
   });
 });
+```
+
+Then add the following command in your `package.json`:
+
+```json
+"scripts": {
+    ...,
+    "test:integration": "tsc; jest",
+  },
 ```
 
 ## Example
@@ -38,8 +47,6 @@ if (process.argv.length === 3) {
   console.log("ok");
 } else {
   console.log("not ok");
-  console.log("hello world!");
-  console.log("Goodbye Marty!");
 }
 ```
 
@@ -48,9 +55,7 @@ You now could write two files:
 ### `notok.spec.toml`
 
 ```toml
-stdout = """not ok
-hello world!
-Goodbye Marty!"""
+stdout = "not ok"
 args = "argument_1 argument_2 argument_3"
 description="Should display 'not ok'"
 ```

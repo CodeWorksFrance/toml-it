@@ -1,3 +1,4 @@
+import { error } from 'console';
 const MAX_PROPERTIES_LENGTH = 3;
 
 export class Structure {
@@ -16,14 +17,16 @@ export class Structure {
       o.description === undefined ||
       o.args === undefined
     ) {
-      throw new Error('Properties are probably mispelled.');
+      error(` 🐛 ${this.filename} ▶ Properties are probably mispelled.\n`);
     }
     return true;
   }
 
   private checkPropertiesLength(o: object): boolean {
     if (Object.keys(o).length > MAX_PROPERTIES_LENGTH) {
-      throw new Error('There are some missing properties in the TOML file.');
+      error(
+        ` 🐛 ${this.filename} ▶ There are too much properties in the TOML file.\n`
+      );
     }
     return true;
   }
@@ -41,8 +44,8 @@ export class Structure {
     },
     filename: string
   ) {
-    this.validate(o);
     this.filename = filename;
+    this.validate(o);
     this.stdout = o.stdout;
     this.args = o.args;
     this.description = o.description;

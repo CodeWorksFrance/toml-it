@@ -30,6 +30,6 @@
 	"include": [
 		"typings/**/*",
 		"src/**/*"
-	],
-	"exclude": ["**/*.spec.ts"]
+, "__mocks__"	],
+	"exclude": ["**/*.spec.ts", "**/__mocks__"]
 }

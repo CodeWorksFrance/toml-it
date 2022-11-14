@@ -62,11 +62,9 @@ export class TestRunner {
       let result: Result;
 
       if (output === test.stdout) {
-        const metadatas = new ResultMetadatas('');
-        result = new Result(Status.SUCCESS, metadatas, test);
+        result = new Result(Status.SUCCESS, new ResultMetadatas(''), test);
       } else {
-        const metadatas = new ResultMetadatas('');
-        result = new Result(Status.FAILURE, metadatas, test);
+        result = new Result(Status.FAILURE, new ResultMetadatas(''), test);
       }
       const end = new Date();
 
@@ -80,7 +78,6 @@ export class TestRunner {
 
       if (result.status === Status.FAILURE) {
         this.diff(result.structure.stdout, output);
-        throw new Error('toml-it silently failed.');
       }
     });
     return true;

@@ -1,0 +1,3 @@
+stdout = "fail"
+args = "argument_1 argument_2 argument_3"
+description="Should fail."
