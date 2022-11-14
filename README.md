@@ -1,6 +1,6 @@
 # toml-it
 
-[![Node.js CI](https://github.com/CodeWorksFrance/toml-it/actions/workflows/nodejs-ci.yml/badge.svg)](https://github.com/CodeWorksFrance/toml-it/actions/workflows/nodejs-ci.yml) &nbsp; [![eslint](https://github.com/CodeWorksFrance/toml-it/actions/workflows/eslint.yml/badge.svg)](https://github.com/CodeWorksFrance/toml-it/actions/workflows/eslint.yml)
+[![npm package](https://img.shields.io/github/package-json/v/CodeWorksFrance/toml-it)](https://www.npmjs.com/package/toml-it) [![Node.js CI](https://github.com/CodeWorksFrance/toml-it/actions/workflows/nodejs-ci.yml/badge.svg)](https://github.com/CodeWorksFrance/toml-it/actions/workflows/nodejs-ci.yml) &nbsp; [![eslint](https://github.com/CodeWorksFrance/toml-it/actions/workflows/eslint.yml/badge.svg)](https://github.com/CodeWorksFrance/toml-it/actions/workflows/eslint.yml)
 
 `toml-it` it a simple integration tests runner. It tests the output of a `node` program.
 
