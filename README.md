@@ -4,7 +4,13 @@
 
 `toml-it` it a simple integration tests runner. It tests the output of a `node` program.
 
-## How to write a test
+## How to install?
+
+```sh
+npm i -D toml-it
+```
+
+## How to write a test?
 
 Tests files must match the following pattern `**/*.spec.toml`.
 The structure of a tests should be:
@@ -15,7 +21,7 @@ description=""
 args=""
 ```
 
-## Launch tests
+## Run tests
 
 If you are using `jest` as test runner, you can simply create a file `toml-it.spec.ts` and enter the following code:
 
