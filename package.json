@@ -1,8 +1,11 @@
 {
   "name": "toml-it",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "./lib/index.js",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/CodeWorksFrance/toml-it"
+  },
   "dependencies": {
     "glob": "^8.0.3",
     "toml": "^3.0.0",
